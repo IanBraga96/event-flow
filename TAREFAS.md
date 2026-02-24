@@ -37,11 +37,12 @@
   - [✅] Hash de senha
   - [✅] Retornar usuário + token
 
-- [ ] **RF03-BE:** Implementar edição de dados do participante (PUT `/participants/:id`)
-  - [ ] Validar autenticação
-  - [ ] Permitir editar: Nome, E-mail
-  - [ ] Validar CPF imutável
-  - [ ] Validar email único (excluindo o atual)
+- [✅] **RF03-BE:** Implementar edição de dados do participante (PUT `/participants/:id`)
+  - [✅] Validar autenticação via Bearer Token
+  - [✅] Validar que o `:id` pertence ao usuário autenticado
+  - [✅] Permitir editar: Nome, E-mail
+  - [✅] Validar CPF imutável (não aceito no body)
+  - [✅] Validar email único (excluindo o atual)
 
 - [ ] **RF04-BE:** Listar eventos inscritos do participante (GET `/participants/:id/events`)
   - [ ] Validar autenticação
@@ -89,6 +90,12 @@
 - [✅] **RF06-BE:** Implementar registro de novo organizador (POST `/auth/register` com `type: "organizer"`)
   - [✅] Mesma rota unificada de RF02-BE
   - [✅] CPF não obrigatório para organizadores
+
+- [✅] **RF06B-BE:** Implementar edição de dados do organizador (PUT `/organizers/:id`)
+  - [✅] Validar autenticação via Bearer Token
+  - [✅] Validar que o `:id` pertence ao usuário autenticado
+  - [✅] Permitir editar: Nome, E-mail
+  - [✅] Validar email único (excluindo o atual)
 
 - [ ] **RF07-BE:** Criar novo evento (POST `/events`)
   - [ ] Validar autenticação como organizador

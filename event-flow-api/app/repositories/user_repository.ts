@@ -23,6 +23,16 @@ export default class UserRepository {
     })
   }
 
+  async findById(id: string): Promise<User | null> {
+    return User.find(id)
+  }
+
+  async update(user: User, data: { name?: string; email?: string }): Promise<User> {
+    user.merge(data)
+    await user.save()
+    return user
+  }
+
   async verifyCredentials(email: string, password: string): Promise<User> {
     return User.verifyCredentials(email, password)
   }
