@@ -30,12 +30,12 @@
 
 ### Backend
 
-- [ ] **RF02-BE:** Implementar registro de novo participante (POST `/participants`)
-  - [ ] Validar campos: Nome, E-mail, CPF
-  - [ ] Validar formato de email único
-  - [ ] Validar CPF único
-  - [ ] Hash de senha
-  - [ ] Salvar no banco de dados
+- [✅] **RF02-BE:** Implementar registro de novo participante (POST `/auth/register` com `type: "participant"`)
+  - [✅] Validar campos: Nome, E-mail, CPF, Senha
+  - [✅] Validar email único
+  - [✅] Validar CPF único
+  - [✅] Hash de senha
+  - [✅] Retornar usuário + token
 
 - [ ] **RF03-BE:** Implementar edição de dados do participante (PUT `/participants/:id`)
   - [ ] Validar autenticação
@@ -86,11 +86,9 @@
 
 ### Backend
 
-- [ ] **RF06-BE:** Implementar registro de novo organizador (POST `/organizers`)
-  - [ ] Validar campos: Nome, E-mail
-  - [ ] Validar email único
-  - [ ] Hash de senha
-  - [ ] Salvar no banco de dados
+- [✅] **RF06-BE:** Implementar registro de novo organizador (POST `/auth/register` com `type: "organizer"`)
+  - [✅] Mesma rota unificada de RF02-BE
+  - [✅] CPF não obrigatório para organizadores
 
 - [ ] **RF07-BE:** Criar novo evento (POST `/events`)
   - [ ] Validar autenticação como organizador
