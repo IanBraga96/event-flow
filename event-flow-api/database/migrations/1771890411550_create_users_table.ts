@@ -5,13 +5,19 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').notNullable()
-      table.string('full_name').nullable()
+      table.uuid('id').notNullable()
+      table.enum('type', ['participant', 'organizer']).notNullable()
       table.string('email', 254).notNullable().unique()
-      table.string('password').notNullable()
+      table.string('password_hash').notNullable()
+      table.string('name').notNullable()
+      table.string('cpf', 11).nullable()
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
+    })
+
+    this.schema.table(this.tableName, (table) => {
+      table.index('cpf')
     })
   }
 

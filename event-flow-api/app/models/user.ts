@@ -1,13 +1,16 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Event from '#models/event'
+import Registration from '#models/registration'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
-  passwordColumnName: 'password',
+  passwordColumnName: 'password_hash',
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
@@ -15,19 +18,31 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare fullName: string | null
+  declare type: 'participant' | 'organizer'
 
   @column()
   declare email: string
 
   @column({ serializeAs: null })
-  declare password: string
+  declare passwordHash: string
+
+  @column()
+  declare name: string
+
+  @column()
+  declare cpf: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @hasMany(() => Event)
+  declare events: HasMany<typeof Event>
+
+  @hasMany(() => Registration)
+  declare registrations: HasMany<typeof Registration>
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }
