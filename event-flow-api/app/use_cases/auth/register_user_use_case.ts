@@ -4,7 +4,7 @@ import UserRepository from '#repositories/user_repository'
 import type { RegisterUserDto } from '#dtos/auth_dto'
 import { inject } from '@adonisjs/core'
 
-inject()
+@inject()
 export default class RegisterUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
