@@ -1,13 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
 import Event from '#models/event'
+import UuidBase from './base/uuid_base.js'
 
-export default class Registration extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: number
-
+export default class Registration extends UuidBase {
   @column()
   declare userId: number
 
