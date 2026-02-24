@@ -4,15 +4,15 @@
 
 ### Backend
 
-- [ ] **RF01-BE:** Implementar endpoint de login (POST `/auth/login`)
-  - [ ] Validar credenciais de Organizadores
-  - [ ] Validar credenciais de Participantes
-  - [ ] Gerar Bearer Token JWT
-  - [ ] Retornar token com dados do usuário
+- [✅] **RF01-BE:** Implementar endpoint de login (POST `/auth/login`)
+  - [✅] Validar credenciais de Organizadores
+  - [✅] Validar credenciais de Participantes
+  - [✅] Gerar Bearer Token JWT
+  - [✅] Retornar token com dados do usuário
 
-- [ ] **RF01-BE:** Implementar middleware de autenticação
-  - [ ] Validar Bearer Token em requisições protegidas
-  - [ ] Retornar erro 401 se token inválido
+- [✅] **RF01-BE:** Implementar middleware de autenticação
+  - [✅] Validar Bearer Token em requisições protegidas
+  - [✅] Retornar erro 401 se token inválido
 
 ### Frontend
 
