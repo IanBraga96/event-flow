@@ -1,4 +1,3 @@
-import hash from '@adonisjs/core/services/hash'
 import User from '#models/user'
 import type { RegisterUserDto } from '#dtos/auth_dto'
 
@@ -12,13 +11,11 @@ export default class UserRepository {
   }
 
   async create(dto: RegisterUserDto): Promise<User> {
-    const passwordHash = await hash.make(dto.password)
-
     return User.create({
       type: dto.type,
       name: dto.name,
       email: dto.email,
-      passwordHash,
+      passwordHash: dto.password,
       cpf: dto.cpf ?? null,
     })
   }
