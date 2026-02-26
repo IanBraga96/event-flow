@@ -35,20 +35,7 @@ function AuthLayout({ brandContent, children }) {
             {brandContent}
           </div>
 
-          {/* Card de imagem com badge LIVE */}
-          <div className={styles.imageCard}>
-            <img
-              src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
-              alt="Evento"
-            />
-            <div className={styles.liveBadge}>
-              <span className={styles.liveDot} />
-              Live
-            </div>
-            <p className={styles.imageCardCaption}>
-              📍 Saiba Mais · Eventos Recentes
-            </p>
-          </div>
+          
 
           <div className={styles.brandFooter}>
             <p className={styles.brandFooterText}>

@@ -57,6 +57,20 @@ function BrandContent() {
           Inscrições com validação automática
         </li>
       </ul>
+      {/* Card de imagem */}
+      <div className={styles.imageCard}>
+        <img
+          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
+          alt="Evento"
+        />
+        <div className={styles.liveBadge}>
+          <span className={styles.liveDot} />
+          Live
+        </div>
+        <p className={styles.imageCardCaption}>
+          📍 Saiba Mais · Eventos Recentes
+        </p>
+      </div>
     </>
   );
 }

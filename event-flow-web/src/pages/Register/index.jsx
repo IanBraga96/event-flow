@@ -62,8 +62,10 @@ function maskCpf(value) {
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 }
 
-/* Conteúdo do painel de marca */
-function BrandContent() {
+/* Conteúdo do painel de marca — recebe type como prop */
+function BrandContent({ type }) {
+  const isParticipant = type === 'participant';
+
   return (
     <>
       <h1 className={styles.brandHeadline}>
@@ -92,6 +94,50 @@ function BrandContent() {
           Controle completo de inscrições e capacidade
         </li>
       </ul>
+
+      {/* Cards de imagem dinâmicos */}
+      <div className={styles.imageCards}>
+
+        {/* Card principal — sempre aparece */}
+        <div className={styles.imageCard}>
+          <img
+            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
+            alt="Evento"
+          />
+          <div className={styles.liveBadge}>
+            <span className={styles.liveDot} />
+            Live
+          </div>
+          <p className={styles.imageCardCaption}>📍 Saiba Mais · Eventos Recentes</p>
+        </div>
+
+        {/* Cards extras — dois para participante, um para organizador */}
+        <div className={styles.imageCardsRow}>
+          <div className={styles.imageCardSmall}>
+            <img
+              src={isParticipant
+                ? "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&q=80"
+                : "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400&q=80"
+              }
+              alt={isParticipant ? "Workshop" : "Organize"}
+            />
+            <p className={`${styles.imageCardCaption} ${!isParticipant ? styles.imageCardCaptionLarge : ''}`}>
+              {isParticipant ? '🎤 Workshops' : 'Meus Eventos'}
+            </p>
+          </div>
+
+            {isParticipant && (
+            <div className={styles.imageCardSmall}>
+              <img
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&q=80"
+                alt="Networking"
+              />
+              <p className={styles.imageCardCaption}>🤝 Networking</p>
+            </div>
+          )}
+
+        </div>
+      </div>
     </>
   );
 }
@@ -101,7 +147,7 @@ function Register() {
   const navigate = useNavigate();
   const { saveSession } = useAuth();
 
-  const [type, setType] = useState('participant'); // 'participant' | 'organizer'
+  const [type, setType] = useState('participant');
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -149,7 +195,6 @@ function Register() {
         name: form.name,
         email: form.email,
         password: form.password,
-        // CPF sem máscara — API espera 11 dígitos (fixedLength(11))
         ...(isParticipant && { cpf: form.cpf.replace(/\D/g, '') }),
       };
 
@@ -166,7 +211,8 @@ function Register() {
   const isParticipant = type === 'participant';
 
   return (
-    <AuthLayout brandContent={<BrandContent />}>
+    /* passa type para BrandContent via prop */
+    <AuthLayout brandContent={<BrandContent type={type} />}>
       <div className={styles.formHeader}>
         <h2 className={styles.formTitle}>Criar conta</h2>
         <p className={styles.formSubtitle}>
