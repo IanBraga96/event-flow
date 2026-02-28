@@ -13,6 +13,7 @@ import { middleware } from '#start/kernel'
 const AuthController = () => import('#controllers/auth_controller')
 const ParticipantsController = () => import('#controllers/participants_controller')
 const OrganizersController = () => import('#controllers/organizers_controller')
+const EventsController = () => import('#controllers/events_controller')
 
 router.get('/', async () => {
   return {
@@ -32,3 +33,7 @@ router.group(() => {
 router.group(() => {
   router.put('/:id', [OrganizersController, 'update'])
 }).prefix('/organizers').use(middleware.auth())
+
+router.group(() => {
+  router.post('/', [EventsController, 'store'])
+}).prefix('/events').use(middleware.auth())

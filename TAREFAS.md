@@ -96,11 +96,11 @@
   - [✅] Permitir editar: Nome, E-mail
   - [✅] Validar email único (excluindo o atual)
 
-- [ ] **RF07-BE:** Criar novo evento (POST `/events`)
-  - [ ] Validar autenticação como organizador
-  - [ ] Validar campos: Nome, Data/Hora, Localização, Capacidade
-  - [ ] Associar evento ao organizador logado
-  - [ ] Salvar no banco de dados
+- [✅] **RF07-BE:** Criar novo evento (POST `/events`)
+  - [✅] Validar autenticação como organizador
+  - [✅] Validar campos: Nome, Data/Hora, Localização, Capacidade
+  - [✅] Associar evento ao organizador logado
+  - [✅] Salvar no banco de dados
 
 - [ ] **RF08-BE:** Editar evento (PUT `/events/:id`)
   - [ ] Validar autenticação

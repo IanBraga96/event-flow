@@ -7,7 +7,7 @@ import UuidBase from './base/uuid_base.js'
 
 export default class Event extends UuidBase {
   @column()
-  declare userId: number
+  declare userId: string
 
   @column()
   declare name: string
