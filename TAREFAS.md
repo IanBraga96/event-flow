@@ -49,11 +49,11 @@
   - [ ] Retornar apenas eventos do participante logado
   - [ ] Incluir dados do evento e status da inscrição
 
-- [ ] **RF05-BE:** Cancelar inscrição em evento (DELETE `/registrations/:id`)
-  - [ ] Validar autenticação
-  - [ ] Validar propriedade da inscrição
-  - [ ] Remover inscrição do banco
-  - [ ] Atualizar contagem de participantes
+- [✅] **RF05-BE:** Cancelar inscrição em evento (DELETE `/registrations/:id`)
+  - [✅] Validar autenticação
+  - [✅] Validar propriedade da inscrição
+  - [✅] Remover inscrição do banco
+  - [✅] Atualizar contagem de participantes
 
 ### Frontend
 
