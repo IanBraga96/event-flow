@@ -44,10 +44,10 @@
   - [✅] Validar CPF imutável (não aceito no body)
   - [✅] Validar email único (excluindo o atual)
 
-- [ ] **RF04-BE:** Listar eventos inscritos do participante (GET `/participants/:id/events`)
-  - [ ] Validar autenticação
-  - [ ] Retornar apenas eventos do participante logado
-  - [ ] Incluir dados do evento e status da inscrição
+- [✅] **RF04-BE:** Listar eventos inscritos do participante (GET `/participants/:id/events`)
+  - [✅] Validar autenticação
+  - [✅] Retornar apenas eventos do participante logado
+  - [✅] Incluir dados do evento e status da inscrição
 
 - [ ] **RF05-BE:** Cancelar inscrição em evento (DELETE `/registrations/:id`)
   - [ ] Validar autenticação
@@ -96,29 +96,29 @@
   - [✅] Permitir editar: Nome, E-mail
   - [✅] Validar email único (excluindo o atual)
 
-- [ ] **RF07-BE:** Criar novo evento (POST `/events`)
-  - [ ] Validar autenticação como organizador
-  - [ ] Validar campos: Nome, Data/Hora, Localização, Capacidade
-  - [ ] Associar evento ao organizador logado
-  - [ ] Salvar no banco de dados
+- [✅] **RF07-BE:** Criar novo evento (POST `/events`)
+  - [✅] Validar autenticação como organizador
+  - [✅] Validar campos: Nome, Data/Hora, Localização, Capacidade
+  - [✅] Associar evento ao organizador logado
+  - [✅] Salvar no banco de dados
 
-- [ ] **RF08-BE:** Editar evento (PUT `/events/:id`)
-  - [ ] Validar autenticação
-  - [ ] Validar propriedade do evento (RN04)
-  - [ ] Permitir editar: Nome, Data/Hora, Localização, Capacidade
-  - [ ] Salvar mudanças
+- [✅] **RF08-BE:** Editar evento (PUT `/events/:id`)
+  - [✅] Validar autenticação
+  - [✅] Validar propriedade do evento (RN04)
+  - [✅] Permitir editar: Nome, Data/Hora, Localização, Capacidade
+  - [✅] Salvar mudanças
 
-- [ ] **RF09-BE:** Deletar evento (DELETE `/events/:id`)
-  - [ ] Validar autenticação
-  - [ ] Validar propriedade do evento (RN04)
-  - [ ] Verificar se há inscritos
-  - [ ] Retornar erro 409 se houver inscritos
-  - [ ] Deletar se vazio
+- [✅] **RF09-BE:** Deletar evento (DELETE `/events/:id`)
+  - [✅] Validar autenticação
+  - [✅] Validar propriedade do evento (RN04)
+  - [✅] Verificar se há inscritos
+  - [✅] Retornar erro 409 se houver inscritos
+  - [✅] Deletar se vazio
 
-- [ ] **RF10-BE:** Listar participantes do evento (GET `/events/:id/participants`)
-  - [ ] Validar autenticação
-  - [ ] Validar propriedade do evento
-  - [ ] Retornar lista com: Nome, E-mail, Data de inscrição
+- [✅] **RF10-BE:** Listar participantes do evento (GET `/events/:id/participants`)
+  - [✅] Validar autenticação
+  - [✅] Validar propriedade do evento
+  - [✅] Retornar lista com: Nome, E-mail, Data de inscrição
 
 ### Frontend
 
