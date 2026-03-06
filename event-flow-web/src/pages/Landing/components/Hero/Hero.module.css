@@ -56,7 +56,6 @@
   border: 1px solid rgba(20,184,166,0.15);
 }
 
-/* glow teal no banner */
 .banner::before {
   content: '';
   position: absolute;
@@ -81,7 +80,7 @@
   pointer-events: none;
 }
 
-/* badge */
+/* ─── Badge ───────────────────────────────────────────── */
 .badge {
   position: absolute;
   top: 18px; left: 20px;
@@ -108,7 +107,7 @@
   50%       { opacity: 0.5; box-shadow: 0 0 4px rgba(20,184,166,0.3); }
 }
 
-/* inner */
+/* ─── Banner inner ────────────────────────────────────── */
 .bannerInner {
   position: relative;
   z-index: 2;
@@ -118,7 +117,6 @@
   padding-top: 1.5rem;
 }
 
-/* setas */
 .arrow {
   width: 40px; height: 40px;
   border-radius: 50%;
@@ -143,7 +141,7 @@
   transform: scale(1.1);
 }
 
-/* texto */
+/* ─── Banner texto ────────────────────────────────────── */
 .bannerText {
   flex: 1;
   display: flex;
@@ -188,7 +186,6 @@
   box-shadow: 0 8px 30px rgba(20,184,166,0.5);
 }
 
-/* dots */
 .dots {
   display: flex;
   gap: 6px;
@@ -212,7 +209,7 @@
   box-shadow: 0 0 8px rgba(20,184,166,0.6);
 }
 
-/* imagem */
+/* ─── Banner imagem ───────────────────────────────────── */
 .bannerImgWrap {
   position: relative;
   width: 480px;
@@ -228,7 +225,7 @@
   transition: filter 0.3s;
 }
 
-.bannerImgWrap:hover .bannerImgGlow { filter: blur(28px); opacity: 1.5; }
+.bannerImgWrap:hover .bannerImgGlow { filter: blur(28px); }
 
 .bannerImg {
   position: relative;
@@ -253,9 +250,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
+  align-items: start;
 }
 
-/* ── Coluna esquerda: artwork ── */
+/* ─── Coluna esquerda ─────────────────────────────────── */
 .artworkCard {
   background: rgba(15, 27, 53, 0.7);
   backdrop-filter: blur(16px);
@@ -264,6 +262,9 @@
   border-radius: 20px;
   padding: 1.2rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .artworkHeader {
@@ -288,17 +289,20 @@
 .artworkGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 0.6rem;
   margin-bottom: 0.8rem;
+  flex: 1;
+  min-height: 320px;
 }
 
 .artworkItem {
-  aspect-ratio: 16/9;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s;
   position: relative;
+  min-height: 100px;
 }
 
 .artworkItem::after {
@@ -309,7 +313,7 @@
   transition: opacity 0.3s;
 }
 
-.artworkItem:hover { transform: scale(1.04); }
+.artworkItem:hover { transform: scale(1.02); }
 .artworkItem:hover::after { opacity: 0.5; }
 
 .artworkImg {
@@ -325,7 +329,8 @@
 .viewMore {
   width: 100%;
   padding: 0.9rem;
-  margin-top: 10px;
+  margin-top: auto;
+  padding-top: 0.9rem;
   background: transparent;
   border: 1px solid rgba(20,184,166,0.2);
   border-radius: 10px;
@@ -343,14 +348,45 @@
   color: #2dd4bf;
 }
 
-/* ── Coluna direita ── */
+/* ─── Overlay dos cards de eventos ───────────────────── */
+.artworkOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,27,53,0.92) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.6rem 0.7rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.artworkItem:hover .artworkOverlay { opacity: 1; }
+
+.artworkCategory {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2dd4bf;
+  margin-bottom: 2px;
+}
+
+.artworkEventTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+/* ─── Coluna direita ──────────────────────────────────── */
 .rightCol {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* card de lista */
 .searchCard {
   background: rgba(15, 27, 53, 0.7);
   backdrop-filter: blur(16px);
@@ -374,7 +410,6 @@
   gap: 0.5rem;
 }
 
-/* cards mais leves com borda */
 .searchItem {
   display: flex;
   align-items: center;
@@ -405,7 +440,7 @@
   flex-shrink: 0;
 }
 
-/* mini cards */
+/* ─── Mini cards ──────────────────────────────────────── */
 .miniGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -445,6 +480,18 @@
   border-color: rgba(20,184,166,0.5);
 }
 
+.miniCardBg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  transition: opacity 0.3s;
+  filter: saturate(1.2);
+}
+
+.miniCard:hover .miniCardBg { opacity: 0.3; }
+
 .miniCardIcon {
   font-size: 1.4rem;
   margin-bottom: 0.3rem;
@@ -469,7 +516,7 @@
   z-index: 1;
 }
 
-/* card featured */
+/* ─── Card featured ───────────────────────────────────── */
 .featuredCard {
   position: relative;
   border-radius: 16px;
@@ -542,71 +589,11 @@
   line-height: 1.5;
 }
 
-.miniCardBg {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.15;
-  transition: opacity 0.3s;
-  filter: saturate(1.2);
-}
-
-.miniCard:hover .miniCardBg { opacity: 0.3; }
-
-/* ─── Overlay dos cards de eventos ──────────────────── */
-.artworkOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(15,27,53,0.92) 0%, transparent 55%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0.6rem 0.7rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-.artworkItem:hover .artworkOverlay { opacity: 1; }
-
-.artworkCategory {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #2dd4bf;
-  margin-bottom: 2px;
-}
-
-.artworkEventTitle {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
-}
-
 /* ─── Responsivo ─────────────────────────────────────── */
 @media (max-width: 1265px) {
   .bannerImgWrap {
     width: 400px;
     height: 240px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .artworkGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .artworkItem {
-    aspect-ratio: 4/3;
-  }
-
-  .miniGrid {
-    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -615,50 +602,28 @@
     width: 320px;
     height: 200px;
   }
-
-  .artworkItem {
-    aspect-ratio: 1/1;
-  }
 }
 
 @media (max-width: 768px) {
-  .heroWrap {
-    padding: 80px 1rem 2rem;
-  }
+  .heroWrap { padding: 80px 1rem 2rem; }
 
-  /* banner vira coluna */
-  .bannerInner {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* setas somem no mobile */
+  .bannerInner { flex-direction: column; gap: 1rem; }
   .arrow { display: none; }
-
-  .bannerImgWrap {
-    width: 100%;
-    height: 200px;
-  }
-
+  .bannerImgWrap { width: 100%; height: 200px; }
   .bannerText { align-items: center; text-align: center; }
   .bannerDesc { max-width: 100%; }
   .dots { justify-content: center; }
 
-  /* grid inferior vira coluna */
   .grid { grid-template-columns: 1fr; }
-
-  /* mini cards ficam 2 colunas */
+  .artworkGrid { grid-template-rows: unset; }
+  .artworkItem { min-height: unset; aspect-ratio: 16/9; }
   .miniGrid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 480px) {
   .banner { padding: 1.2rem; }
-
   .bannerTitle { font-size: 1.6rem; }
-
   .artworkGrid { grid-template-columns: 1fr; }
-
   .miniGrid { grid-template-columns: 1fr 1fr; }
-
   .featuredCard { height: 140px; }
 }

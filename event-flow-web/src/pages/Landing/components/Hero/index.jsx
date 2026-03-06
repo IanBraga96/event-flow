@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
 
 const slides = [
@@ -56,6 +56,20 @@ function Hero() {
   const [current, setCurrent] = useState(0);
   const slide = slides[current];
 
+  const rightColRef = useRef(null);
+  const [artworkHeight, setArtworkHeight] = useState('auto');
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (rightColRef.current) {
+        setArtworkHeight(rightColRef.current.offsetHeight + 'px');
+      }
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
+
   const prev = () => setCurrent(i => (i - 1 + slides.length) % slides.length);
   const next = () => setCurrent(i => (i + 1) % slides.length);
 
@@ -78,17 +92,14 @@ function Hero() {
           </div>
 
           <div className={styles.bannerInner}>
-            {/* seta esquerda */}
             <button className={styles.arrow} onClick={prev}>‹</button>
 
-            {/* texto */}
             <div className={styles.bannerText}>
               <h1 className={styles.bannerTitle}>{slide.title}</h1>
               <p className={styles.bannerDesc}>{slide.description}</p>
               <a href="/register" className={styles.bannerBtn}>
                 Inscrever-se →
               </a>
-              {/* dots */}
               <div className={styles.dots}>
                 {slides.map((_, i) => (
                   <button
@@ -100,7 +111,6 @@ function Hero() {
               </div>
             </div>
 
-            {/* imagem */}
             <div className={styles.bannerImgWrap}>
               <div className={styles.bannerImgGlow} />
               <img
@@ -111,7 +121,6 @@ function Hero() {
               />
             </div>
 
-            {/* seta direita */}
             <button className={styles.arrow} onClick={next}>›</button>
           </div>
         </div>
@@ -119,10 +128,11 @@ function Hero() {
         {/* ── GRADE INFERIOR ── */}
         <div className={styles.grid}>
 
-          {/* coluna esquerda: grid de fotos */}
-          <div className={styles.artworkCard}>
+          {/* coluna esquerda */}
+          <div className={styles.artworkCard} style={{ height: artworkHeight }}>
             <div className={styles.artworkHeader}>
               <h2 className={styles.artworkTitle}>Eventos em Destaque</h2>
+              <span className={styles.artworkArrow}>›</span>
             </div>
 
             <div className={styles.artworkGrid}>
@@ -141,9 +151,8 @@ function Hero() {
           </div>
 
           {/* coluna direita */}
-          <div className={styles.rightCol}>
+          <div className={styles.rightCol} ref={rightColRef}>
 
-            {/* lista de destaques */}
             <div className={styles.searchCard}>
               <h2 className={styles.searchTitle}>Próximos Eventos</h2>
               <div className={styles.searchList}>
@@ -156,13 +165,12 @@ function Hero() {
               </div>
             </div>
 
-            {/* mini cards */}
             <div className={styles.miniGrid}>
               {miniCards.map((card, i) => (
                 <div key={i} className={styles.miniCard}>
-                    <img src={card.img} alt={card.label} className={styles.miniCardBg} />
-                    <div className={styles.miniCardIcon}>{card.emoji}</div>
-                    <h3 className={styles.miniCardLabel}>{card.label}</h3>
+                  <img src={card.img} alt={card.label} className={styles.miniCardBg} />
+                  <div className={styles.miniCardIcon}>{card.emoji}</div>
+                  <h3 className={styles.miniCardLabel}>{card.label}</h3>
                 </div>
               ))}
               <div className={`${styles.miniCard} ${styles.miniCardAccent}`}>
@@ -172,7 +180,6 @@ function Hero() {
               </div>
             </div>
 
-            {/* card featured */}
             <div className={styles.featuredCard}>
               <img
                 src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
