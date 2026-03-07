@@ -1,11 +1,14 @@
 import styles from './UserTypes.module.css';
+import participante from '../../../../assets/images/landing/participante.jpg';
+import organizador from '../../../../assets/images/landing/organizador.jpg';
+
 
 const types = [
   {
     type: 'Participante',
     tag: 'Para quem quer participar',
     emoji: '🎟️',
-    img: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&q=80',
+    img: participante,
     color: '#14b8a6',
     features: [
       { icon: '🔍', text: 'Inscrever-se em eventos' },
@@ -19,7 +22,7 @@ const types = [
     type: 'Organizador',
     tag: 'Para quem quer criar',
     emoji: '🎯',
-    img: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80',
+    img: organizador,
     color: '#f59e0b',
     features: [
       { icon: '✦', text: 'Criar e publicar eventos' },
