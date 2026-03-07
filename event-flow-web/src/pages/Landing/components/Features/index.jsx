@@ -1,4 +1,8 @@
 import styles from './Features.module.css';
+import funcio1 from '../../../../assets/images/landing/funcio1.jpg';
+import funcio2 from '../../../../assets/images/landing/funcio2.jpg';
+import funcio3 from '../../../../assets/images/landing/funcio3.jpg';
+import funcio4 from '../../../../assets/images/landing/funcio4.jpg';
 
 const features = [
   {
@@ -7,7 +11,7 @@ const features = [
     desc: 'Monte seu evento com nome, data, localização e capacidade. Publique e comece a receber inscrições imediatamente.',
     tag: 'Organizador',
     color: 'amber',
-    img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80',
+    img: funcio1,
   },
   {
     emoji: '🎟️',
@@ -15,7 +19,7 @@ const features = [
     desc: 'Participantes se inscrevem com um clique. O sistema valida automaticamente vagas disponíveis e conflitos de horário.',
     tag: 'Participante',
     color: 'teal',
-    img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80',
+    img: funcio2,
   },
   {
     emoji: '🔒',
@@ -23,7 +27,7 @@ const features = [
     desc: 'Login via Bearer Token com separação clara entre perfis de Participante e Organizador. Seus dados protegidos.',
     tag: 'Segurança',
     color: 'teal',
-    img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
+    img: funcio3,
   },
   {
     emoji: '📊',
@@ -31,7 +35,7 @@ const features = [
     desc: 'Defina a capacidade máxima do evento. O sistema bloqueia novas inscrições automaticamente quando o limite é atingido.',
     tag: 'Organizador',
     color: 'amber',
-    img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80',
+    img: funcio4,
   },
 ];
 
