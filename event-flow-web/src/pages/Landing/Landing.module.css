@@ -1,0 +1,48 @@
+:root {
+  --navy:       #0f1b35;
+  --navy-mid:   #1a2a4a;
+  --navy-light: #243557;
+  --teal:       #14b8a6;
+  --teal-light: #2dd4bf;
+  --amber:      #f59e0b;
+  --text-light: #94a3b8;
+  --white:      #ffffff;
+}
+
+.page {
+  background: #0f1b35;
+  color: var(--white);
+  font-family: 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Pontinhos no fundo */
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orbs animados */
+.page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 15% 20%, rgba(20, 184, 166, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 45% at 85% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes orbShift {
+  from { opacity: 0.85; }
+  to   { opacity: 1; }
+}

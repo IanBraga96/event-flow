@@ -1,0 +1,238 @@
+/* ─── Section ─────────────────────────────────────────── */
+.section {
+  padding: 5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ─── Header ──────────────────────────────────────────── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #14b8a6;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.titleAccent { color: #14b8a6; }
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* ─── Cards grid ──────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ─── Card ────────────────────────────────────────────── */
+.card {
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  background: rgba(15,27,53,0.85);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 64px rgba(0,0,0,0.5);
+}
+
+/* ─── Imagem (topo do card) ───────────────────────────── */
+.cardImgWrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+.cardImg {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  filter: brightness(0.8) saturate(1.1);
+}
+
+.card:hover .cardImg {
+  transform: scale(1.06);
+  filter: brightness(0.65) saturate(1.2);
+}
+
+.cardImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(15,27,53,0.6) 100%);
+}
+
+/* tag sobre a imagem */
+.cardTag {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ─── Body (parte de baixo, sempre visível) ───────────── */
+.cardBody {
+  padding: 1.5rem 1.8rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cardEmoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.cardType {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+/* divisor colorido */
+.cardDivider {
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 0.2rem;
+  transition: width 0.4s ease;
+}
+
+.card:hover .cardDivider { width: 60px; }
+
+/* ─── Features ────────────────────────────────────────── */
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  transition: color 0.25s, transform 0.25s;
+}
+
+.card:hover .featureItem {
+  color: rgba(255,255,255,0.9);
+  transform: translateX(4px);
+}
+
+.featureIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+  transition: transform 0.25s;
+}
+
+.card:hover .featureIcon { transform: scale(1.15); }
+
+/* ─── Botão ───────────────────────────────────────────── */
+.cardBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  background: var(--btn-color);
+  color: #0f1b35;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: 100px;
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 0.4rem;
+
+  /* botão sempre visível mas mais discreto */
+  opacity: 0.75;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, filter 0.25s, box-shadow 0.25s, transform 0.3s ease;
+}
+
+.card:hover .cardBtn {
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  filter: brightness(1.08);
+}
+
+/* ─── Responsivo ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section { padding: 3rem 1rem; }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cardImgWrap { height: 220px; }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card .featureItem { color: rgba(255,255,255,0.9); }
+  .card .cardBtn { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .cardType { font-size: 1.4rem; }
+  .cardImgWrap { height: 180px; }
+}
