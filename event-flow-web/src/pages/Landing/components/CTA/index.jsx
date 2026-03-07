@@ -1,4 +1,5 @@
 import styles from './CTA.module.css';
+import call from '../../../../assets/images/landing/CTA.jpg';
 
 function CTA() {
   return (
@@ -57,7 +58,7 @@ function CTA() {
         {/* ── DIREITA: imagem ── */}
         <div className={styles.right}>
           <img
-            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+            src={call}
             alt="Evento"
             className={styles.img}
           />
