@@ -1,12 +1,18 @@
 import styles from './Instagram.module.css';
+import insta1 from '../../../../assets/images/landing/insta1.jpg'; 
+import insta2 from '../../../../assets/images/landing/insta2.jpg'; 
+import insta3 from '../../../../assets/images/landing/insta3.jpg'; 
+import insta4 from '../../../../assets/images/landing/insta4.jpg'; 
+import insta5 from '../../../../assets/images/landing/insta5.jpg';
+import insta6 from '../../../../assets/images/landing/insta6.jpg';
 
 const photos = [
-  'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80',
-  'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&q=80',
-  'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&q=80',
-  'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&q=80',
-  'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400&q=80',
-  'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=400&q=80',
+  insta1,
+  insta2,
+  insta3,
+  insta4,
+  insta5,
+  insta6,
 ];
 
 function Instagram() {
