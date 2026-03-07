@@ -1,42 +1,52 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
+import hero1 from '../../../../assets/images/landing/hero1.jpg'; 
+import hero2 from '../../../../assets/images/landing/hero2.jpg'; 
+import hero3 from '../../../../assets/images/landing/hero3.jpg'; 
+import destaque1 from '../../../../assets/images/landing/destaque1.jpg'; 
+import destaque2 from '../../../../assets/images/landing/destaque2.jpg';
+import destaque3 from '../../../../assets/images/landing/destaque3.jpg';
+import destaque4 from '../../../../assets/images/landing/destaque4.jpg';
+import presencial from '../../../../assets/images/landing/presencial.jpg';
+import online from '../../../../assets/images/landing/online.jpg';
+import como from '../../../../assets/images/landing/comofunci.jpg';
 
 const slides = [
   {
     title: 'Summit de Inovação',
     description: 'O maior encontro de tecnologia e inovação do Brasil. Palestras, workshops e networking com os maiores nomes do setor.',
-    img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80',
+    img: hero1,
   },
   {
     title: 'Festival de Design & UX',
     description: 'Três dias imersivos em design thinking, pesquisa de usuário e tendências de interface para os próximos anos.',
-    img: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=900&q=80',
+    img: hero2,
   },
   {
-    title: 'Hackathon Dev Connect',
+    title: 'Hackathon Connect',
     description: 'Quarenta e oito horas para construir soluções reais. Forme seu time e mostre do que é capaz.',
-    img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80',
+    img: hero3,
   },
 ];
 
 const gridEvents = [
   {
-    img: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&q=80',
-    title: 'Summit de Inovação',
-    category: 'Tecnologia',
+    img: destaque1,
+    title: 'Oficina de Robótica',
+    category: 'Engenharia',
   },
   {
-    img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80',
+    img: destaque2,
     title: 'Hackathon Dev Connect',
     category: 'Programação',
   },
   {
-    img: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&q=80',
+    img: destaque3,
     title: 'Festival de Design',
     category: 'Design & UX',
   },
   {
-    img: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=400&q=80',
+    img: destaque4,
     title: 'Conferência de IA',
     category: 'Inteligência Artificial',
   },
@@ -48,8 +58,8 @@ const destaques = [
 ];
 
 const miniCards = [
-  { label: 'Presenciais', emoji: '📍', img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&q=80' },
-  { label: 'Online', emoji: '💻', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&q=80' },
+  { label: 'Presenciais', emoji: '📍', img: presencial },
+  { label: 'Online', emoji: '💻', img: online },
 ];
 
 function Hero() {
@@ -182,7 +192,7 @@ function Hero() {
 
             <div className={styles.featuredCard}>
               <img
-                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+                src= {como}
                 alt="Destaque"
                 className={styles.featuredImg}
               />
