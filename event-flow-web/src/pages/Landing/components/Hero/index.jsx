@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { listEvents } from '../../../../services/eventService';
 import styles from './Hero.module.css';
-import hero1 from '../../../../assets/images/landing/hero1.jpg'; 
-import hero2 from '../../../../assets/images/landing/hero2.jpg'; 
-import hero3 from '../../../../assets/images/landing/hero3.jpg'; 
-import destaque1 from '../../../../assets/images/landing/destaque1.jpg'; 
+import hero1 from '../../../../assets/images/landing/hero1.jpg';
+import hero2 from '../../../../assets/images/landing/hero2.jpg';
+import hero3 from '../../../../assets/images/landing/hero3.jpg';
+import destaque1 from '../../../../assets/images/landing/destaque1.jpg';
 import destaque2 from '../../../../assets/images/landing/destaque2.jpg';
 import destaque3 from '../../../../assets/images/landing/destaque3.jpg';
 import destaque4 from '../../../../assets/images/landing/destaque4.jpg';
@@ -52,11 +53,6 @@ const gridEvents = [
   },
 ];
 
-const destaques = [
-  'Hackathon Dev Connect',
-  'Conferência de Inteligência Artificial',
-];
-
 const miniCards = [
   { label: 'Presenciais', emoji: '📍', img: presencial },
   { label: 'Online', emoji: '💻', img: online },
@@ -65,9 +61,24 @@ const miniCards = [
 function Hero() {
   const [current, setCurrent] = useState(0);
   const slide = slides[current];
+  const [destaques, setDestaques] = useState([]);
 
   const rightColRef = useRef(null);
   const [artworkHeight, setArtworkHeight] = useState('auto');
+
+  useEffect(() => {
+    listEvents()
+      .then(({ events }) => {
+        const now = new Date();
+        const upcoming = events
+          .filter((ev) => new Date(ev.dateTime) > now)
+          .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+          .slice(0, 2)
+          .map((ev) => ev.name);
+        setDestaques(upcoming);
+      })
+      .catch(() => setDestaques([]));
+  }, []);
 
   useEffect(() => {
     const updateHeight = () => {
