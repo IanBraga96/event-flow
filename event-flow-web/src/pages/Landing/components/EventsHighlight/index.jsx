@@ -1,127 +1,56 @@
+import { useEffect, useState } from 'react';
+import { listEvents } from '../../../../services/eventService';
 import styles from './EventsHighlight.module.css';
-import ev1 from '../../../../assets/images/landing/ev1.jpg'; 
-import ev2 from '../../../../assets/images/landing/ev2.jpg'; 
-import ev3 from '../../../../assets/images/landing/ev3.jpg'; 
-import ev4 from '../../../../assets/images/landing/ev4.jpg'; 
-import ev5 from '../../../../assets/images/landing/ev5.jpg';
-import ev6 from '../../../../assets/images/landing/ev6.jpg';
-import ev7 from '../../../../assets/images/landing/ev7.jpg';
-import ev8 from '../../../../assets/images/landing/ev8.jpg';
-import ev9 from '../../../../assets/images/landing/ev9.jpg';
-import ev10 from '../../../../assets/images/landing/ev10.jpg';
-import ev11 from '../../../../assets/images/landing/ev11.jpg'; 
-import ev12 from '../../../../assets/images/landing/ev12.jpg';
 
-const events = [
-  {
-    tag: 'Ao vivo',
-    tagColor: 'live',
-    title: 'Summit de Inovação 2026',
-    meta: '7 Mar 2026 — São Paulo',
-    org: 'TechBrasil',
-    vagas: '120 vagas',
-    img: ev1,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Workshop de UX Design',
-    meta: '22 Mar 2026 — Remoto',
-    org: 'DesignHub',
-    vagas: '80 vagas',
-    img: ev2,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Hackathon Dev Connect',
-    meta: '30 Abr 2026 — BH',
-    org: 'DevConnect',
-    vagas: '70 vagas',
-    img: ev3,
-  },
-  {
-    tag: 'Finalizado',
-    tagColor: 'done',
-    title: 'Conferência de IA 2024',
-    meta: '10 Fev 2026 — São Paulo',
-    org: 'AIBrasil',
-    vagas: 'Encerrado',
-    img: ev4,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Meetup de Startups',
-    meta: '05 Abr 2026 — Rio de Janeiro',
-    org: 'StartupRJ',
-    vagas: '150 vagas',
-    img: ev5,
-  },
-  {
-    tag: 'Finalizado',
-    tagColor: 'done',
-    title: 'Festival de Engenharia',
-    meta: '20 Fev 2026 — Curitiba',
-    org: 'EngFest',
-    vagas: 'Encerrado',
-    img: ev6,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Workshop de Liderança',
-    meta: '18 Abr 2026 — Remoto',
-    org: 'LeadAcademy',
-    vagas: '60 vagas',
-    img: ev7,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Bootcamp de Python',
-    meta: '25 Abr 2026 — Remoto',
-    org: 'CodeAcademy',
-    vagas: '100 vagas',
-    img: ev8,
-  },
-  {
-    tag: 'Finalizado',
-    tagColor: 'done',
-    title: 'Encontro de Product Managers',
-    meta: '01 Fev 2026 — São Paulo',
-    org: 'PMHub',
-    vagas: 'Encerrado',
-    img: ev9,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Semana de Acessibilidade Digital',
-    meta: '10 Mai 2026 — Remoto',
-    org: 'A11yBrasil',
-    vagas: '240 vagas',
-    img: ev10,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'live',
-    title: 'Maratona de Data Science',
-    meta: '10 Mai 2026 — Porto Alegre',
-    org: 'DataSul',
-    vagas: '180 vagas',
-    img: ev11,
-  },
-  {
-    tag: 'Próximo',
-    tagColor: 'upcoming',
-    title: 'Fórum de Cibersegurança',
-    meta: '30 Mai 2026 — Brasília',
-    org: 'CyberBR',
-    vagas: '250 vagas',
-    img: ev12,
-  },
-];
+const API_URL = process.env.REACT_APP_API_URL;
+
+/**
+ * Formata a data ISO para exibição: "7 Mar 2026"
+ */
+function formatDate(isoString) {
+  const date = new Date(isoString);
+  return date.toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+/**
+ * Determina tag e cor com base na data do evento
+ */
+function getTagInfo(isoString) {
+  const now = new Date();
+  const eventDate = new Date(isoString);
+  const diffHours = (eventDate - now) / (1000 * 60 * 60);
+
+  if (diffHours < 0) {
+    return { tag: 'Finalizado', tagColor: 'done' };
+  }
+  if (diffHours <= 24) {
+    return { tag: 'Ao vivo', tagColor: 'live' };
+  }
+  return { tag: 'Próximo', tagColor: 'upcoming' };
+}
+
+/**
+ * Mapeia evento da API para o formato do Card
+ */
+function toCardEvent(apiEvent) {
+  const { tag, tagColor } = getTagInfo(apiEvent.dateTime);
+  const isDone = tagColor === 'done';
+
+  return {
+    id: apiEvent.id,
+    tag,
+    tagColor,
+    title: apiEvent.name,
+    meta: `${formatDate(apiEvent.dateTime)} — ${apiEvent.location}`,
+    org: apiEvent.user?.name ?? '',
+    vagas: isDone ? 'Encerrado' : `${apiEvent.capacity} vagas`,
+    img: apiEvent.image ? `${API_URL}${apiEvent.image}` : null,
+  };
+}
 
 function Card({ ev }) {
   return (
@@ -151,6 +80,18 @@ function Card({ ev }) {
 }
 
 function EventsHighlight() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    listEvents()
+      .then(({ events: data }) => setEvents(data.map(toCardEvent)))
+      .catch(() => setEvents([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading || events.length === 0) return null;
+
   return (
     <section className={styles.section} id="eventos">
       <div className={styles.container}>

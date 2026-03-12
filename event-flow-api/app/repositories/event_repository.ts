@@ -15,7 +15,7 @@ export default class EventRepository {
   }
 
   async findAll(): Promise<Event[]> {
-    return Event.all()
+    return Event.query().preload('user')
   }
 
   async findById(id: string): Promise<Event | null> {

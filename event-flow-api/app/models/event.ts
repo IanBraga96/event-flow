@@ -24,6 +24,9 @@ export default class Event extends UuidBase {
   @column()
   declare capacity: number
 
+  @column()
+  declare image: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
