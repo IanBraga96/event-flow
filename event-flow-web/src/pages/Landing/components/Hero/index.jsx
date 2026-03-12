@@ -1,57 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
 import { listEvents } from '../../../../services/eventService';
 import styles from './Hero.module.css';
-import hero1 from '../../../../assets/images/landing/hero1.jpg';
-import hero2 from '../../../../assets/images/landing/hero2.jpg';
-import hero3 from '../../../../assets/images/landing/hero3.jpg';
-import destaque1 from '../../../../assets/images/landing/destaque1.jpg';
-import destaque2 from '../../../../assets/images/landing/destaque2.jpg';
-import destaque3 from '../../../../assets/images/landing/destaque3.jpg';
-import destaque4 from '../../../../assets/images/landing/destaque4.jpg';
 import presencial from '../../../../assets/images/landing/presencial.jpg';
 import online from '../../../../assets/images/landing/online.jpg';
 import como from '../../../../assets/images/landing/comofunci.jpg';
 
-const slides = [
-  {
-    title: 'Summit de Inovação',
-    description: 'O maior encontro de tecnologia e inovação do Brasil. Palestras, workshops e networking com os maiores nomes do setor.',
-    img: hero1,
-  },
-  {
-    title: 'Festival de Design & UX',
-    description: 'Três dias imersivos em design thinking, pesquisa de usuário e tendências de interface para os próximos anos.',
-    img: hero2,
-  },
-  {
-    title: 'Hackathon Connect',
-    description: 'Quarenta e oito horas para construir soluções reais. Forme seu time e mostre do que é capaz.',
-    img: hero3,
-  },
-];
+const API_URL = process.env.REACT_APP_API_URL;
 
-const gridEvents = [
-  {
-    img: destaque1,
-    title: 'Oficina de Robótica',
-    category: 'Engenharia',
-  },
-  {
-    img: destaque2,
-    title: 'Hackathon Dev Connect',
-    category: 'Programação',
-  },
-  {
-    img: destaque3,
-    title: 'Festival de Design',
-    category: 'Design & UX',
-  },
-  {
-    img: destaque4,
-    title: 'Conferência de IA',
-    category: 'Inteligência Artificial',
-  },
-];
+
+/**
+ * Embaralha array (Fisher-Yates) e retorna os primeiros n
+ */
+function pickRandom(arr, n) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+}
 
 const miniCards = [
   { label: 'Presenciais', emoji: '📍', img: presencial },
@@ -60,8 +27,10 @@ const miniCards = [
 
 function Hero() {
   const [current, setCurrent] = useState(0);
-  const slide = slides[current];
+  const [slides, setSlides] = useState([]);
+  const slide = slides[current] || {};
   const [destaques, setDestaques] = useState([]);
+  const [gridEvents, setGridEvents] = useState([]);
 
   const rightColRef = useRef(null);
   const [artworkHeight, setArtworkHeight] = useState('auto');
@@ -72,12 +41,31 @@ function Hero() {
         const now = new Date();
         const upcoming = events
           .filter((ev) => new Date(ev.dateTime) > now)
-          .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
-          .slice(0, 2)
-          .map((ev) => ev.name);
-        setDestaques(upcoming);
+          .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+
+        setDestaques(upcoming.slice(0, 2).map((ev) => ev.name));
+
+        setSlides(
+          pickRandom(events, 3).map((ev) => ({
+            title: ev.name,
+            description: ev.description || '',
+            img: ev.image ? `${API_URL}${ev.image}` : null,
+          }))
+        );
+
+        setGridEvents(
+          pickRandom(events, 4).map((ev) => ({
+            img: ev.image ? `${API_URL}${ev.image}` : null,
+            title: ev.name,
+            category: ev.location,
+          }))
+        );
       })
-      .catch(() => setDestaques([]));
+      .catch(() => {
+        setSlides([]);
+        setDestaques([]);
+        setGridEvents([]);
+      });
   }, []);
 
   useEffect(() => {
