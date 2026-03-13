@@ -49,6 +49,9 @@ npm install
 # Executar migrações do banco de dados
 npm run migration:latest
 
+# Após subir o Docker e preparar o banco, executar os seeders
+node ace db:seed
+
 # Iniciar servidor (porta 3333)
 npm run dev
 ```
@@ -66,6 +69,9 @@ npm install
 # Executar migrações do banco de dados
 npm run migration:latest
 
+# Executar seeders (dados iniciais)
+node ace db:seed
+
 # Iniciar servidor (porta 3333)
 npm run dev
 ```
@@ -75,12 +81,20 @@ npm run dev
 ```bash
 cd event-flow-web
 
+# Criar arquivo .env a partir do exemplo
+cp .env.example .env
+
+# Ajustar URL da API no .env (se necessário)
+# REACT_APP_API_URL=http://localhost:3333
+
 # Instalar dependências
 npm install
 
 # Iniciar aplicação (porta 3000)
 npm start
 ```
+
+> Antes de iniciar o frontend, certifique-se de que a API está rodando na porta configurada em `REACT_APP_API_URL`.
 
 ## ✨ Funcionalidades
 
