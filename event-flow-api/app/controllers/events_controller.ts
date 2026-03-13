@@ -7,6 +7,7 @@ import UpdateEventUseCase from '#use_cases/event/update_event_use_case'
 import DeleteEventUseCase from '#use_cases/event/delete_event_use_case'
 import ListEventsUseCase from '#use_cases/event/list_events_use_case'
 import ListEventParticipantsUseCase from '#use_cases/event/list_event_participants_use_case'
+import ListMyEventsUseCase from '#use_cases/event/list_my_events_use_case'
 import { createEventValidator, updateEventValidator } from '#validators/event_validator'
 
 @inject()
@@ -16,11 +17,18 @@ export default class EventsController {
     private updateEventUseCase: UpdateEventUseCase,
     private deleteEventUseCase: DeleteEventUseCase,
     private listEventsUseCase: ListEventsUseCase,
-    private listEventParticipantsUseCase: ListEventParticipantsUseCase
+    private listEventParticipantsUseCase: ListEventParticipantsUseCase,
+    private listMyEventsUseCase: ListMyEventsUseCase
   ) {}
 
   async index({ response }: HttpContext) {
     const events = await this.listEventsUseCase.execute()
+    return response.ok({ events })
+  }
+
+  async mine({ auth, response }: HttpContext) {
+    const userId = auth.user!.id
+    const events = await this.listMyEventsUseCase.execute(userId)
     return response.ok({ events })
   }
 

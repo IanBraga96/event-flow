@@ -47,6 +47,7 @@ router.get('/events', [EventsController, 'index'])
 
 router
   .group(() => {
+    router.get('/mine', [EventsController, 'mine'])
     router.post('/', [EventsController, 'store'])
     router.put('/:id', [EventsController, 'update'])
     router.delete('/:id', [EventsController, 'destroy'])
