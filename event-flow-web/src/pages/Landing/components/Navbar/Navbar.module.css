@@ -140,6 +140,85 @@
 
 .btnCta:hover .btnCtaDot { background: #0f1b35; }
 
+/* ─── User logado ────────────────────────────────────── */
+.navUser {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.15);
+  border: 1.5px solid rgba(20, 184, 166, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2dd4bf;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.navAvatar:hover {
+  background: rgba(20, 184, 166, 0.25);
+  border-color: #14b8a6;
+}
+
+.navUserInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.navUserName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.01em;
+}
+
+.navUserType {
+  font-size: 0.62rem;
+  color: #14b8a6;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.navLogout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-left: 0.2rem;
+}
+
+.navLogout:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.mobileUser {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0;
+}
+
 /* ─── Hamburguer ──────────────────────────────────────── */
 .hamburger {
   display: none;

@@ -129,31 +129,30 @@ export default function CreateEvent() {
 
       {/* ── Navbar ── */}
       <nav className={styles.navbar}>
-        <div className={styles.navInner}>
-          <Link to="/" className={styles.navLogo}>
-            <LogoIcon />
-            <span className={styles.navLogoText}>Event<span className={styles.navAccent}>Flow</span></span>
-          </Link>
+        <Link to="/" className={styles.navLogo}>
+          <LogoIcon />
+          <span className={styles.navLogoText}>Event<span className={styles.navAccent}>Flow</span></span>
+        </Link>
 
-          <div className={styles.navLinks}>
-            <Link to="/" className={styles.navLink}>Explorar eventos</Link>
-            <Link to="/events/create" className={`${styles.navLink} ${styles.navLinkActive}`}>Criar evento</Link>
-          </div>
+        <ul className={styles.navLinks}>
+          <li><Link to="/" className={styles.navLink}>Explorar eventos</Link></li>
+          <li><Link to="/events/create" className={`${styles.navLink} ${styles.navLinkActive}`}>Criar evento</Link></li>
+          <li><Link to="/organizer/events" className={styles.navLink}>Meus eventos</Link></li>
+        </ul>
 
-          <div className={styles.navUser}>
-            <div className={styles.navAvatar}>{initials}</div>
-            <div className={styles.navUserInfo}>
-              <span className={styles.navUserName}>{user?.name?.split(' ')[0]}</span>
-              <span className={styles.navUserType}>Organizador</span>
-            </div>
-            <button className={styles.navLogout} onClick={logout} title="Sair">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                <polyline points="16 17 21 12 16 7"/>
-                <line x1="21" y1="12" x2="9" y2="12"/>
-              </svg>
-            </button>
+        <div className={styles.navUser}>
+          <Link to="/organizer/events" className={styles.navAvatar}>{initials}</Link>
+          <div className={styles.navUserInfo}>
+            <span className={styles.navUserName}>{user?.name?.split(' ')[0]}</span>
+            <span className={styles.navUserType}>Organizador</span>
           </div>
+          <button className={styles.navLogout} onClick={logout} title="Sair">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </button>
         </div>
       </nav>
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
 import styles from './Navbar.module.css';
 
 function LogoIcon() {
@@ -18,6 +19,13 @@ function LogoIcon() {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const initials = isAuthenticated
+    ? (user?.name || 'U').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+    : '';
+  const roleLabel = user?.type === 'organizer' ? 'Organizador' : 'Participante';
+  const profileLink = user?.type === 'organizer' ? '/organizer/events' : '/participant/profile';
 
   return (
     <nav className={styles.nav}>
@@ -37,13 +45,32 @@ function Navbar() {
         <li><a href="#contato">Contato</a></li>
       </ul>
 
-      {/* Botões — desktop */}
+      {/* Ações — desktop */}
       <div className={styles.navActions}>
-        <Link to="/login" className={styles.btnGhost}>Entrar</Link>
-        <Link to="/register" className={styles.btnCta}>
-          <span className={styles.btnCtaDot} />
-          Criar conta
-        </Link>
+        {isAuthenticated ? (
+          <div className={styles.navUser}>
+            <Link to={profileLink} className={styles.navAvatar}>{initials}</Link>
+            <div className={styles.navUserInfo}>
+              <span className={styles.navUserName}>{user?.name?.split(' ')[0]}</span>
+              <span className={styles.navUserType}>{roleLabel}</span>
+            </div>
+            <button className={styles.navLogout} onClick={logout} title="Sair">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <>
+            <Link to="/login" className={styles.btnGhost}>Entrar</Link>
+            <Link to="/register" className={styles.btnCta}>
+              <span className={styles.btnCtaDot} />
+              Criar conta
+            </Link>
+          </>
+        )}
       </div>
 
       {/* Hamburguer — mobile */}
@@ -67,13 +94,32 @@ function Navbar() {
           <li><a href="#contato" onClick={() => setOpen(false)}>Contato</a></li>
         </ul>
         <div className={styles.mobileActions}>
-          <Link to="/login" className={styles.btnGhost} onClick={() => setOpen(false)}>
-            Entrar
-          </Link>
-          <Link to="/register" className={styles.btnCta} onClick={() => setOpen(false)}>
-            <span className={styles.btnCtaDot} />
-            Criar conta
-          </Link>
+          {isAuthenticated ? (
+            <div className={styles.mobileUser}>
+              <div className={styles.navAvatar}>{initials}</div>
+              <div className={styles.navUserInfo}>
+                <span className={styles.navUserName}>{user?.name?.split(' ')[0]}</span>
+                <span className={styles.navUserType}>{roleLabel}</span>
+              </div>
+              <button className={styles.navLogout} onClick={() => { logout(); setOpen(false); }} title="Sair">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16 17 21 12 16 7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className={styles.btnGhost} onClick={() => setOpen(false)}>
+                Entrar
+              </Link>
+              <Link to="/register" className={styles.btnCta} onClick={() => setOpen(false)}>
+                <span className={styles.btnCtaDot} />
+                Criar conta
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
