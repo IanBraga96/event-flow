@@ -17,7 +17,10 @@ function LogoIcon() {
   );
 }
 
+const HOME_ICON = <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
+
 const NAV_MAIN_PARTICIPANT = [
+  { to: '/participant/dashboard', label: 'Início', icon: HOME_ICON },
   { to: '/participant/profile', label: 'Meu perfil',
     icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
   { to: '/events', label: 'Explorar eventos',
@@ -27,6 +30,7 @@ const NAV_MAIN_PARTICIPANT = [
 ];
 
 const NAV_MAIN_ORGANIZER = [
+  { to: '/organizer/dashboard', label: 'Início', icon: HOME_ICON },
   { to: '/organizer/profile', label: 'Meu perfil',
     icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
   { to: '/events', label: 'Explorar eventos',

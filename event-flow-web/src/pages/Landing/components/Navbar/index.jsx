@@ -26,7 +26,9 @@ function Navbar() {
     : '';
   const roleLabel   = user?.type === 'organizer' ? 'Organizador' : 'Participante';
   const profileLink = user?.type === 'organizer' ? '/organizer/profile' : '/participant/profile';
-  const dashLink    = '/events'; // fictício até dashboard ficar pronto
+  const dashLink = isAuthenticated
+    ? (user?.type === 'organizer' ? '/organizer/dashboard' : '/participant/dashboard')
+    : '/';
 
   return (
     <nav className={styles.nav}>
