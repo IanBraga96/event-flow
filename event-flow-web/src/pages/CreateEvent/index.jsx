@@ -26,6 +26,10 @@ function LogoIcon() {
 export default function CreateEvent() {
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
+  function handleLogout() {
+  logout();
+  navigate('/');
+}
 
   useEffect(() => {
     if (!isAuthenticated || user?.type !== 'organizer') {
@@ -129,12 +133,13 @@ export default function CreateEvent() {
 
       {/* ── Navbar ── */}
       <nav className={styles.navbar}>
-        <Link to="/Event" className={styles.navLogo}>
+        <Link to="/" className={styles.navLogo}>
           <LogoIcon />
           <span className={styles.navLogoText}>Event<span className={styles.navAccent}>Flow</span></span>
         </Link>
 
         <ul className={styles.navLinks}>
+          <li><Link to="/organizer/dashboard" className={styles.navLink}>Início</Link></li>
           <li><Link to="/events" className={styles.navLink}>Explorar eventos</Link></li>
           <li><Link to="/events/create" className={`${styles.navLink} ${styles.navLinkActive}`}>Criar evento</Link></li>
           <li><Link to="/organizer/events" className={styles.navLink}>Meus eventos</Link></li>
@@ -146,7 +151,7 @@ export default function CreateEvent() {
             <span className={styles.navUserName}>{user?.name?.split(' ')[0]}</span>
             <span className={styles.navUserType}>Organizador</span>
           </div>
-          <button className={styles.navLogout} onClick={logout} title="Sair">
+          <button className={styles.navLogout} onClick={handleLogout} title="Sair">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
               <polyline points="16 17 21 12 16 7"/>
