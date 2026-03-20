@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Landing from './pages/Landing';
+import ParticipantDashboard from './pages/ParticipantDashboard';
 import Profile from './pages/Profile';
 import OrganizerProfile from './pages/OrganizerProfile';
 import Events from './pages/Events';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/participant/dashboard" element={<ParticipantDashboard />} />
         <Route path="/participant/profile" element={<Profile />} />
         <Route path="/organizer/profile" element={<OrganizerProfile />} />
         <Route path="/events" element={<Events />} />
