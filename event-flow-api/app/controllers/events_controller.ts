@@ -63,7 +63,12 @@ export default class EventsController {
       imagePath = `/uploads/events/${fileName}`
     }
 
-    const event = await this.updateEventUseCase.execute({ userId, eventId, ...data, ...(imagePath !== undefined && { image: imagePath }) })
+    const event = await this.updateEventUseCase.execute({
+      userId,
+      eventId,
+      ...data,
+      ...(imagePath !== undefined && { image: imagePath }),
+    })
     return response.ok({ event })
   }
 
