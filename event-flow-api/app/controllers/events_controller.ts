@@ -7,7 +7,8 @@ import UpdateEventUseCase from '#use_cases/event/update_event_use_case'
 import DeleteEventUseCase from '#use_cases/event/delete_event_use_case'
 import ListEventsUseCase from '#use_cases/event/list_events_use_case'
 import ListEventParticipantsUseCase from '#use_cases/event/list_event_participants_use_case'
-import ListMyEventsUseCase from '#use_cases/event/list_my_events_use_case'
+import ListMyCreatedEventsUseCase from '#use_cases/event/list_my_created_events_use_case'
+import RegisterForEventUseCase from '#use_cases/event/register_for_event_use_case'
 import { createEventValidator, updateEventValidator } from '#validators/event_validator'
 
 @inject()
@@ -18,7 +19,8 @@ export default class EventsController {
     private deleteEventUseCase: DeleteEventUseCase,
     private listEventsUseCase: ListEventsUseCase,
     private listEventParticipantsUseCase: ListEventParticipantsUseCase,
-    private listMyEventsUseCase: ListMyEventsUseCase
+    private listMyCreatedEventsUseCase: ListMyCreatedEventsUseCase,
+    private registerForEventUseCase: RegisterForEventUseCase
   ) {}
 
   async index({ response }: HttpContext) {
@@ -28,7 +30,7 @@ export default class EventsController {
 
   async mine({ auth, response }: HttpContext) {
     const userId = auth.user!.id
-    const events = await this.listMyEventsUseCase.execute(userId)
+    const events = await this.listMyCreatedEventsUseCase.execute(userId)
     return response.ok({ events })
   }
 
@@ -77,5 +79,20 @@ export default class EventsController {
     const eventId = request.param('id')
     const participants = await this.listEventParticipantsUseCase.execute(eventId, userId)
     return response.ok({ participants })
+  }
+
+  async register({ auth, request, response }: HttpContext) {
+    const userId = auth.user!.id
+    const eventId = request.param('id')
+    const registration = await this.registerForEventUseCase.execute(eventId, userId)
+
+    return response.created({
+      registration: {
+        id: registration.id,
+        eventId: registration.eventId,
+        userId: registration.userId,
+        createdAt: registration.createdAt,
+      },
+    })
   }
 }
