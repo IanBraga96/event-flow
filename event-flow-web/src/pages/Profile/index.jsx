@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './Profile.module.css';
 
@@ -37,6 +37,12 @@ function LogoIcon() {
 
 export default function Profile() {
   const { user: realUser, token, saveSession, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate('/');
+  }
   const user = realUser || {
     id: '1', name: 'Érika Laiane', email: 'erika@email.com',
     type: 'participant', cpf: '123.456.789-00',
@@ -117,6 +123,7 @@ export default function Profile() {
         </Link>
 
         <ul className={styles.navLinks}>
+          <li><Link to="/participant/dashboard" className={styles.navLink}>Início</Link></li>
           <li><Link to="/events" className={styles.navLink}>Explorar eventos</Link></li>
           {isOrganizer && <li><Link to="/organizer/events" className={styles.navLink}>Meus eventos</Link></li>}
           {!isOrganizer && <li><Link to="/participant/events" className={styles.navLink}>Minhas inscrições</Link></li>}
@@ -136,7 +143,7 @@ export default function Profile() {
               {isOrganizer ? 'Organizador' : 'Participante'}
             </span>
           </div>
-          <button className={styles.navLogout} onClick={logout} title="Sair">
+          <button className={styles.navLogout} onClick={handleLogout} title="Sair">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
               <polyline points="16 17 21 12 16 7"/>
