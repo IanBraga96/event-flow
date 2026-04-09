@@ -52,6 +52,7 @@ router
     router.put('/:id', [EventsController, 'update'])
     router.delete('/:id', [EventsController, 'destroy'])
     router.get('/:id/participants', [EventsController, 'participants'])
+    router.post('/:id/register', [EventsController, 'register'])
   })
   .prefix('/events')
   .use(middleware.auth())

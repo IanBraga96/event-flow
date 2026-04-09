@@ -7,10 +7,10 @@ import UuidBase from './base/uuid_base.js'
 
 export default class Registration extends UuidBase {
   @column()
-  declare userId: number
+  declare userId: string
 
   @column()
-  declare eventId: number
+  declare eventId: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

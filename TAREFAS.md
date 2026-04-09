@@ -162,17 +162,17 @@
 
 ### Backend
 
-- [ ] **RN01-BE:** Implementar validação de capacidade
-  - [ ] Validar limite máximo na inscrição
-  - [ ] Retornar erro 409 se cheio
+- [✅] **RN01-BE:** Implementar validação de capacidade
+  - [✅] Validar limite máximo na inscrição
+  - [✅] Retornar erro 409 se cheio
 
-- [ ] **RN02-BE:** Implementar validação de conflito de horário
-  - [ ] Na inscrição, verificar se participante está inscrito em outro evento no mesmo horário
-  - [ ] Retornar erro 409 se houver conflito
+- [✅] **RN02-BE:** Implementar validação de conflito de horário
+  - [✅] Na inscrição, verificar se participante está inscrito em outro evento no mesmo horário
+  - [✅] Retornar erro 409 se houver conflito
 
-- [ ] **RN03-BE:** Implementar validação de unicidade de inscrição
-  - [ ] Na inscrição, verificar se já está inscrito
-  - [ ] Retornar erro 409 se já existe
+- [✅] **RN03-BE:** Implementar validação de unicidade de inscrição
+  - [✅] Na inscrição, verificar se já está inscrito
+  - [✅] Retornar erro 409 se já existe
 
 - [ ] **RN05-BE:** Validar dados obrigatórios do evento
   - [ ] Nome, Data/Hora, Localização, Capacidade Máxima
@@ -180,11 +180,11 @@
 - [✅] Criar endpoint de listagem geral de eventos (GET `/events`)
   - [✅] Listar todos os eventos disponíveis
 
-- [ ] Criar endpoint de inscrição em evento (POST `/events/:id/register`)
-  - [ ] Validar autenticação
-  - [ ] Aplicar todas as regras de negócio (RN01-RN03)
-  - [ ] Criar registro de inscrição
-  - [ ] Atualizar contagem de participantes
+- [✅] Criar endpoint de inscrição em evento (POST `/events/:id/register`)
+  - [✅] Validar autenticação
+  - [✅] Aplicar todas as regras de negócio (RN01-RN03)
+  - [✅] Criar registro de inscrição
+  - [✅] Atualizar contagem de participantes
 
 ### Frontend
 

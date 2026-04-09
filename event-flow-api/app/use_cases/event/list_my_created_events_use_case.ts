@@ -3,7 +3,7 @@ import Event from '#models/event'
 import EventRepository from '#repositories/event_repository'
 
 @inject()
-export default class ListMyEventsUseCase {
+export default class ListMyCreatedEventsUseCase {
   constructor(private eventRepository: EventRepository) {}
 
   async execute(userId: string): Promise<Event[]> {
