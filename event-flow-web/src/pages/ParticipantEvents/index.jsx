@@ -74,10 +74,14 @@ export default function ParticipantEvents() {
     if (!user?.id) return;
     listMyRegistrations(user.id)
       .then(data => {
-        // API pode retornar { events: [] } ou { data: [] }
-        const list = data.events || data.data || data || [];
-        setEvents(Array.isArray(list) ? list : []);
-      })
+          const list = data.events || data.data || data || [];
+          const normalized = (Array.isArray(list) ? list : []).map(item => ({
+            ...item.event,
+            registrationId: item.registrationId,
+            registeredAt: item.registeredAt,
+          }));
+          setEvents(normalized);
+        })
       .catch(() => setError('Não foi possível carregar suas inscrições.'))
       .finally(() => setLoading(false));
   }, [user]);
@@ -203,7 +207,18 @@ export default function ParticipantEvents() {
                 <div className={styles.eventImgWrap} onClick={() => navigate(`/events/${ev.id}`)}>
                   {img
                     ? <img src={img} alt={ev.name} className={styles.eventImg} />
-                    : <div className={styles.eventImgFallback}>📅</div>
+                    : (
+                      <div className={styles.eventImgFallback}>
+                        <svg width="32" height="32" viewBox="0 0 42 42" fill="none">
+                          <rect x="7" y="11" width="28" height="22" rx="4" stroke="#14b8a6" strokeWidth="1.8" />
+                          <line x1="7" y1="18" x2="35" y2="18" stroke="#14b8a6" strokeWidth="1.8" />
+                          <line x1="14" y1="7" x2="14" y2="13" stroke="#14b8a6" strokeWidth="2" strokeLinecap="round" />
+                          <line x1="28" y1="7" x2="28" y2="13" stroke="#14b8a6" strokeWidth="2" strokeLinecap="round" />
+                          <path d="M12 25 Q21 21 30 25" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+                          <path d="M14 29 Q21 25 28 29" stroke="#f59e0b" strokeWidth="1.4" strokeLinecap="round" fill="none" opacity="0.45" />
+                        </svg>
+                      </div>
+                    )
                   }
                   <span className={`${styles.badge} ${styles[`badge_${status.key}`]}`}>
                     {status.label}

@@ -80,3 +80,13 @@ export async function listMyRegistrations(userId) {
 export async function cancelRegistration(id) {
   await api.delete(`/registrations/${id}`);
 }
+
+/**
+ * POST /events/:id/register (authenticated)
+ * @param {string} eventId
+ * @returns {{ registration: object }}
+ */
+export async function registerForEvent(eventId) {
+  const response = await api.post(`/events/${eventId}/register`);
+  return response.data;
+}

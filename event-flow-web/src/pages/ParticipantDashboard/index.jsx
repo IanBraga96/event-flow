@@ -228,26 +228,42 @@ export default function ParticipantDashboard() {
   const [suggestions, setSuggestions] = useState([]);
   const [loading,     setLoading]     = useState(true);
 
-  useEffect(() => {
-    if (!user?.id) return;
-    listMyRegistrations(user.id)
-      .then(data => {
-        const list = data.events || data.data || data || [];
-        setMyEvents(Array.isArray(list) ? list : []);
-      })
-      .catch(() => setMyEvents([]))
-      .finally(() => setLoading(false));
+useEffect(() => {
+  if (!user?.id) return;
 
-    listEvents()
-      .then(({ events }) => {
-        const sugg = events
-          .filter(ev => getStatus(ev.dateTime) !== 'done')
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 4);
-        setSuggestions(sugg);
-      })
-      .catch(() => setSuggestions([]));
-  }, [user]);
+  Promise.all([
+    listMyRegistrations(user.id),
+    listEvents(),
+  ])
+    .then(([regData, evData]) => {
+      const registrations = regData.events || regData.data || regData || [];
+      const allEvents     = evData.events || [];
+
+      const eventsMap = Object.fromEntries(allEvents.map(ev => [ev.id, ev]));
+
+      const normalized = Array.isArray(registrations)
+        ? registrations.map(item => {
+            const base = item.event ?? item;
+            const full = eventsMap[base.id] ?? {};
+            return { ...base, ...full };
+          })
+        : [];
+
+      setMyEvents(normalized);
+    })
+    .catch(() => setMyEvents([]))
+    .finally(() => setLoading(false));
+
+  listEvents()
+    .then(({ events }) => {
+      const sugg = events
+        .filter(ev => getStatus(ev.dateTime) !== 'done')
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4);
+      setSuggestions(sugg);
+    })
+    .catch(() => setSuggestions([]));
+}, [user]);
 
   if (!isAuthenticated || user?.type !== 'participant') return null;
 
