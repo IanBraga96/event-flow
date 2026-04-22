@@ -48,7 +48,7 @@ function Navbar() {
         <li><a href="#funcionalidades">Funcionalidades</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#eventos">Eventos</a></li>
-        <li><a href="#contato">Contato</a></li>
+        <li><a href="#cta">Começar</a></li>
       </ul>
 
       {/* Ações — desktop */}
@@ -98,7 +98,7 @@ function Navbar() {
           <li><a href="#funcionalidades" onClick={() => setOpen(false)}>Funcionalidades</a></li>
           <li><a href="#como-funciona" onClick={() => setOpen(false)}>Como funciona</a></li>
           <li><a href="#eventos" onClick={() => setOpen(false)}>Eventos</a></li>
-          <li><a href="#contato" onClick={() => setOpen(false)}>Contato</a></li>
+          <li><a href="#cta" onClick={() => setOpen(false)}>Começar</a></li>
         </ul>
         <div className={styles.mobileActions}>
           {isAuthenticated ? (
