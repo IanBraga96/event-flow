@@ -3,7 +3,7 @@ import call from '../../../../assets/images/landing/CTA.jpg';
 
 function CTA() {
   return (
-    <section className={styles.section}>
+    <section id="cta" className={styles.section}>
       {/* glows atrás da caixa */}
       <div className={styles.glowTeal} />
       <div className={styles.glowAmber} />
